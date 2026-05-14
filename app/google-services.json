@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "387260043532",
+    "project_id": "smartdiab-1c97e",
+    "storage_bucket": "smartdiab-1c97e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387260043532:android:f0226a22b93d57293fb929",
+        "android_client_info": {
+          "package_name": "com.example.smartdiab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe_Gs4-KC7NrvC-0Cn-mfR-plVdqFvwPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
