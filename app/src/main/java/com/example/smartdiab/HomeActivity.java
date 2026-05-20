@@ -82,8 +82,6 @@ public class HomeActivity extends AppCompatActivity {
             map.getController().setCenter(new GeoPoint(33.5731, -7.5898)); // Casablanca
 
             locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), map);
-            locationOverlay.enableMyLocation();
-            locationOverlay.enableFollowLocation();
             map.getOverlays().add(locationOverlay);
         }
     }
@@ -135,11 +133,19 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (map != null) map.onResume();
+        if (locationOverlay != null) {
+            locationOverlay.enableMyLocation();
+            locationOverlay.enableFollowLocation();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         if (map != null) map.onPause();
+        if (locationOverlay != null) {
+            locationOverlay.disableMyLocation();
+            locationOverlay.disableFollowLocation();
+        }
     }
 }

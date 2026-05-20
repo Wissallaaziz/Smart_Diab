@@ -10,11 +10,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -66,6 +66,10 @@ public class AiActivity extends AppCompatActivity implements TextToSpeech.OnInit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ai);
 
+        if (savedInstanceState != null) {
+            currentPhotoPath = savedInstanceState.getString("photoPath");
+        }
+
         // UI
         userInput = findViewById(R.id.userInput);
         chatRecyclerView = findViewById(R.id.chatRecyclerView);
@@ -73,7 +77,6 @@ public class AiActivity extends AppCompatActivity implements TextToSpeech.OnInit
         diabetesTypeHeader = findViewById(R.id.diabetesTypeHeader);
         FloatingActionButton sendBtn = findViewById(R.id.sendBtn);
         
-        // Correction ici : MaterialButton au lieu de ImageButton
         MaterialButton openCameraBtn = findViewById(R.id.openCameraBtn);
         MaterialButton micBtn = findViewById(R.id.micBtn);
 
@@ -109,6 +112,12 @@ public class AiActivity extends AppCompatActivity implements TextToSpeech.OnInit
 
         openCameraBtn.setOnClickListener(v -> checkCameraPermission());
         micBtn.setOnClickListener(v -> startVoiceRecognition());
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("photoPath", currentPhotoPath);
     }
 
     private void addMessage(String text, boolean isUser) {
@@ -162,6 +171,18 @@ public class AiActivity extends AppCompatActivity implements TextToSpeech.OnInit
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSIONS_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "Permission caméra refusée", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
@@ -171,7 +192,7 @@ public class AiActivity extends AppCompatActivity implements TextToSpeech.OnInit
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
         } catch (IOException e) {
-            Toast.makeText(this, "Erreur caméra", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erreur lors de la création du fichier", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -204,6 +225,11 @@ public class AiActivity extends AppCompatActivity implements TextToSpeech.OnInit
     }
 
     private void analyzeImage() {
+        if (currentPhotoPath == null) {
+            Toast.makeText(this, "Erreur : image introuvable", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         aiAvatar.setAnimation("Doctor_Avatar.json");
         aiAvatar.playAnimation();
 
