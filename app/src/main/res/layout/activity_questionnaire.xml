@@ -3,76 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/bg_light"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="24dp">
 
-    <!-- Progrès -->
+    <!-- Progress Indicator -->
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/questionProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="40dp"
-        app:indicatorColor="#34C759"
-        app:trackColor="#E8F5E9"
-        android:progress="0"
+        app:indicatorColor="@color/primary_blue"
+        app:trackColor="@color/soft_cyan"
+        android:progress="30"
         app:trackCornerRadius="10dp" />
 
-    <!-- Illustration avec un contour doux -->
+    <TextView
+        android:id="@+id/progressLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question 3 sur 10"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- Illustration Container with soft shadow -->
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="220dp"
-        android:layout_height="220dp"
-        app:cardCornerRadius="110dp"
-        app:cardElevation="0dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="#F0F0F0"
-        android:layout_marginBottom="32dp">
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:strokeWidth="0dp"
+        android:layout_marginBottom="40dp">
 
         <ImageView
             android:id="@+id/questionImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
+            android:padding="32dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_health_illustration" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/questionText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="sans-serif-medium"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="Question ?"
-        android:textColor="#2D3142"
-        android:textSize="22sp" />
+        android:text="Faites-vous de l'exercice régulièrement ?"
+        android:textColor="@color/text_primary"
+        android:textSize="24sp" />
 
-    <!-- Bouton Option 1 (Oui) -->
+    <!-- Choice Buttons -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn1"
-        style="@style/Widget.Material3.Button.OutlinedButton"
+        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginBottom="12dp"
-        android:text="Oui"
+        android:layout_height="72dp"
+        android:layout_marginBottom="16dp"
+        android:text="Oui, absolument"
         android:textAllCaps="false"
-        android:textColor="#007AFF"
-        android:textSize="16sp"
-        app:cornerRadius="16dp"
-        app:strokeColor="#007AFF" />
+        android:textSize="18sp"
+        app:cornerRadius="20dp"
+        app:backgroundTint="@color/soft_green"
+        android:textColor="@color/accent_green"/>
 
-    <!-- Bouton Option 2 (Non) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn2"
+        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:text="Non"
+        android:layout_height="72dp"
+        android:text="Pas vraiment"
         android:textAllCaps="false"
-        android:textSize="16sp"
-        app:backgroundTint="#34C759"
-        app:cornerRadius="16dp"
-        app:elevation="2dp" />
+        android:textSize="18sp"
+        app:cornerRadius="20dp"
+        app:backgroundTint="#FFF1F0"
+        android:textColor="#F44336"/>
 
 </LinearLayout>

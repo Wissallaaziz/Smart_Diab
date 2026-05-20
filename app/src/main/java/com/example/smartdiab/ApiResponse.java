@@ -1,12 +1,25 @@
 package com.example.smartdiab;
 
-import java.util.List;
-
 public class ApiResponse {
 
-    public List<Result> results;
+    private String meal;
+    private int carbs;
+    private String verdict;
+    private String ai_analysis;
 
-    public static class Result {
-        public String title;
+    public String getMeal() {
+        return meal;
+    }
+
+    public int getCarbs() {
+        return carbs;
+    }
+
+    public String getVerdict() {
+        return verdict;
+    }
+
+    public String getAi_analysis() {
+        return ai_analysis;
     }
 }
